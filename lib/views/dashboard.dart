@@ -60,7 +60,7 @@ class _DashboardState extends State<Dashboard> {
                             context,
                             PageRouteBuilder(
                               pageBuilder: (context, animation1, animation2) =>
-                                  ChatRoom(),
+                                  ChatRoom(curruser: 'user1'),
                               transitionDuration: Duration.zero,
                               reverseTransitionDuration: Duration.zero,
                             ),
@@ -95,7 +95,9 @@ class _DashboardState extends State<Dashboard> {
                             context,
                             PageRouteBuilder(
                               pageBuilder: (context, animation1, animation2) =>
-                                  ChatRoom(),
+                                  ChatRoom(
+                                curruser: 'user2',
+                              ),
                               transitionDuration: Duration.zero,
                               reverseTransitionDuration: Duration.zero,
                             ),
