@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:hashed/services/db.dart';
 import 'package:hashed/views/chatroom.dart';
+
+import 'dart:math';
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key? key}) : super(key: key);
@@ -17,6 +20,11 @@ class _DashboardState extends State<Dashboard> {
       buttoncolorone = colorone;
       buttoncolortwo = colortwo;
     });
+  }
+
+  String randomstring() {
+    return String.fromCharCodes(
+        List.generate(6, (index) => Random().nextInt(25) + 97));
   }
 
   @override
@@ -54,13 +62,19 @@ class _DashboardState extends State<Dashboard> {
                     children: [
                       GestureDetector(
                         onTapDown: (_) {
+                          String _chatid = randomstring();
+                          print(_chatid);
+                          db_conn().createchat(_chatid);
                           buttonAnimation(
                               Color.fromARGB(255, 238, 238, 238), Colors.white);
                           Navigator.pushReplacement(
                             context,
                             PageRouteBuilder(
                               pageBuilder: (context, animation1, animation2) =>
-                                  ChatRoom(curruser: 'user1'),
+                                  ChatRoom(
+                                curruser: 'user1',
+                                chatid: _chatid,
+                              ),
                               transitionDuration: Duration.zero,
                               reverseTransitionDuration: Duration.zero,
                             ),
@@ -91,12 +105,14 @@ class _DashboardState extends State<Dashboard> {
                         onTapDown: (_) {
                           buttonAnimation(
                               Colors.white, Color.fromARGB(255, 238, 238, 238));
+                          db_conn().joinchat('nvtnsp');
                           Navigator.pushReplacement(
                             context,
                             PageRouteBuilder(
                               pageBuilder: (context, animation1, animation2) =>
                                   ChatRoom(
                                 curruser: 'user2',
+                                chatid: 'gswysx',
                               ),
                               transitionDuration: Duration.zero,
                               reverseTransitionDuration: Duration.zero,

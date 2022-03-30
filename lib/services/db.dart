@@ -4,7 +4,7 @@ class db_conn {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   CollectionReference chats = FirebaseFirestore.instance.collection('chats');
 
-  Future createchat(user1, id) {
+  Future createchat(String id) {
     return chats
         .doc(id)
         .set({'user1': true, 'user2': false})
@@ -12,7 +12,7 @@ class db_conn {
         .catchError((error) => print("failed"));
   }
 
-  Future joinchat(user2, id) {
+  Future joinchat(String id) {
     return chats
         .doc(id)
         .update({'user2': true})
@@ -20,7 +20,7 @@ class db_conn {
         .catchError((error) => print('failed'));
   }
 
-  Future sendmessage(content, sender, id) {
+  Future sendmessage(String content, String sender, String id) {
     return chats
         .doc(id)
         .collection('messages')
@@ -34,7 +34,7 @@ class db_conn {
     return chats
         .doc(id)
         .collection('messages')
-        .orderBy('timestamp', descending: false)
+        .orderBy('timestamp', descending: true)
         .snapshots();
   }
 }
